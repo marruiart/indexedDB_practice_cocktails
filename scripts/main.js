@@ -17,33 +17,33 @@ function genRandomInt(min, max) {
 function generarPersonaje() {
     let num = genRandomInt(0, 19);
 
-    const clave = document.getElementById("clave").value;
-    const tlf = document.getElementById("tlf").value;
+    const strAlcoholic = document.getElementById("strAlcoholic").value;
+    const strDrinkThumb = document.getElementById("strDrinkThumb").value;
 
     fetch('https://rickandmortyapi.com/api/character')
         .then(response => response.json())
         .then(data => console.log(data.results[num].name))
 
-    document.getElementById("nombre").value = data.results[num].name;
+    document.getElementById("strDrink").value = data.results[num].name;
 
     let pers = generarProvincia();
     pers.then(function (data) {
         let num = genRandomInt(0, 21);
-        provincia = data[num].nombre;
+        provincia = data[num].strDrink;
     });
 
 }
 
 function saveData() {
-    const nombre = document.getElementById("nombre").value;
-    const clave = document.getElementById("clave").value;
-    const tlf = document.getElementById("tlf").value;
+    const strDrink = document.getElementById("strDrink").value;
+    const strAlcoholic = document.getElementById("strAlcoholic").value;
+    const strDrinkThumb = document.getElementById("strDrinkThumb").value;
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
         db = event.target.result;
         usersObjectStore = db.transaction(indexedDbStorage, "readwrite").objectStore(indexedDbStorage);
-        usersObjectStore.put({ nombre, clave, tlf });
+        usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb });
     };
     leerDatos();
 }
@@ -71,17 +71,19 @@ function leerDatos() {
             console.log(usuarios);
             usuarios.forEach(element => {
                 var linea = document.createElement("tr"), // creo una fila
-                    campoNombre = document.createElement("td"), // creo una celda para el nombre
-                    campoClave = document.createElement("td"), // creo una celda para la clave
-                    campoTlf = document.createElement("td"), // creo una celda para el tlf
+                    campoStrDrink = document.createElement("td"), // creo una celda para el strDrink
+                    campoStrAlcoholic = document.createElement("td"), // creo una celda para la strAlcoholic
+                    campoStrDrinkThumb = document.createElement("td"), // creo una celda para el strDrinkThumb
+                    strInstructions = document.createElement("td"), // creo una celda para el strDrinkThumb
 
                     campoBorrar = document.createElement("td"), // creo una celda para el botón 'borrar'
                     botonBorrar = document.createElement("button"), // creo un botón
                     imagenBorrar = document.createElement("img"); // creo una imagen
 
-                campoNombre.innerHTML = element.nombre; // escribo el nombre contenido en el array
-                campoClave.innerHTML = element.clave; // escribo la clave contenida en el array
-                campoTlf.innerHTML = element.tlf; // escribo el tlf contenido en el array
+                campoStrDrink.innerHTML = element.strDrink; // escribo el strDrink contenido en el array
+                campoStrAlcoholic.innerHTML = element.strAlcoholic; // escribo la strAlcoholic contenida en el array
+                campoStrDrinkThumb.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
+                strInstructions.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
 
                 botonBorrar.innerHTML = '<i class="fa-solid fa-trash"></i>' // etiqueto el botón
                 botonBorrar.className = "borrar"; // asigno el botón a una clase
@@ -92,9 +94,10 @@ function leerDatos() {
                 botonBorrar.appendChild(imagenBorrar); // añado la imagen al botón
                 campoBorrar.appendChild(botonBorrar); // añado el botón a la celda
 
-                linea.appendChild(campoNombre); // añado a la línea la celda con el nombre
-                linea.appendChild(campoClave); // añado a la línea la celda con la clave
-                linea.appendChild(campoTlf); // añado a la línea la celda con el tlf
+                linea.appendChild(campoStrDrink); // añado a la línea la celda con el strDrink
+                linea.appendChild(campoStrAlcoholic); // añado a la línea la celda con la strAlcoholic
+                linea.appendChild(campoStrDrinkThumb); // añado a la línea la celda con el strDrinkThumb
+                linea.appendChild(strInstructions); // añado a la línea la celda con el strDrinkThumb
                 linea.appendChild(campoBorrar); // añado a la línea la celda con el botón
 
                 cuerpo.appendChild(linea); // añado al tbody 'cuerpo' la línea
@@ -110,9 +113,9 @@ window.onload = function () {
     requestDB.onupgradeneeded = function (event) {
         db = event.target.result;
         var objectStore = db.createObjectStore(indexedDbStorage, { keyPath: "id", autoIncrement: true });
-        objectStore.createIndex("nombre_index", "nombre", { unique: false });
-        objectStore.createIndex("clave_index", "clave", { unique: false });
-        objectStore.createIndex("tlf_index", "tlf", { unique: false });
+        objectStore.createIndex("strDrink_index", "strDrink", { unique: false });
+        objectStore.createIndex("strAlcoholic_index", "strAlcoholic", { unique: false });
+        objectStore.createIndex("strDrinkThumb_index", "strDrinkThumb", { unique: false });
 
     };
     document.getElementById("save").addEventListener("click", saveData);
