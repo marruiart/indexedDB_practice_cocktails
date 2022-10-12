@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>Cocktail Shakers</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel='stylesheet' type='text/css' media='screen' href='./assets/css/styles.css'>
+	<link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico" />
+
+	<!-- Modules import -->
+	<script src="./scripts/main.js" type="module"></script>
+	<script src="./scripts/loadAPIs.js" type="module"></script>
+
+	<!-- Fonts & icons -->
+	<script src="https://kit.fontawesome.com/2e84e4fa5d.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="content --bg_header_c">
+		<header class="header --centered">
+			<h1><i class="fa-solid fa-martini-glass-citrus"></i> Cocktail Shakers</h1>
+		</header>
+
+		<menu class="menu">
+			<div class="menu__div">
+				<a href="#" class="button--menu">Characters</a>
+				<a href="#" class="button--menu">Houses</a>
+				<a href="#" class="button--menu">Subjects</a>
+				<a href="#" class="button--menu">Pets</a>
+			</div>
+		</menu>
+
+		<main class="main --bg_light_bg_c">
+			<table id="tabla" class="filas">
+
+				<thead class="--bg_enfasis_c --white">
+					<tr>
+						<th> <input type="text" id="nombre" size="15" placeholder="Nombre..." required /> </td>
+						<th> <input type="text" id="clave" size="15" placeholder="Clave..." required /> </th>
+						<th> <input type="text" id="tlf" size="15" placeholder="Planeta..." required /> </th>
+						<th>
+							<input type="button" id="save" value="save" />
+							<button id="aleatorio">Random cocktail</button>
+						</th>
+					</tr>
+				</thead>
+
+				<tbody id="cuerpo">
+
+
+				</tbody>
+
+			</table>
+
+			<section class="cocktail">
+				<div class="cocktail__info">
+					<h2 id="strDrink" class="h2"></h2>
+					<p id="strAlcoholic"></p>
+				</div>
+				<div class="cocktail__img">
+					<img id="strDrinkThumb" class="cocktail__img__img" src="" alt="">
+				</div>
+			</section>
+
+			<button type="button" id="getcocktail">Click</button>
+
+		</main>
+
+	</div>
+
+</body>
+
+</html>
