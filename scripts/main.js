@@ -2,37 +2,11 @@ import { funGetCocktail, fillRandomCocktail } from './loadAPIs.js';
 
 'use strict';
 
-
 var requestDB, db, usersObjectStore;
 var indexedDbName = "cocktails";
 var indexedDbVersion = 1;
 var indexedDbStorage = "cocktail";
 
-
-
-function genRandomInt(min, max) {
-    return Math.floor(Math.random() * ((max + 1) - min) + min);
-}
-
-function generarPersonaje() {
-    let num = genRandomInt(0, 19);
-
-    const strAlcoholic = document.getElementById("strAlcoholic").value;
-    const strDrinkThumb = document.getElementById("strDrinkThumb").value;
-
-    fetch('https://rickandmortyapi.com/api/character')
-        .then(response => response.json())
-        .then(data => console.log(data.results[num].name))
-
-    document.getElementById("strDrink").value = data.results[num].name;
-
-    let pers = generarProvincia();
-    pers.then(function (data) {
-        let num = genRandomInt(0, 21);
-        provincia = data[num].strDrink;
-    });
-
-}
 
 function saveData() {
     const strDrink = document.getElementById("inputStrDrink").value;
@@ -46,7 +20,7 @@ function saveData() {
         usersObjectStore = db.transaction(indexedDbStorage, "readwrite").objectStore(indexedDbStorage);
         usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb, strInstructions });
     };
-    leerDatos();
+    readData();
 }
 
 function deleteData(id) {
@@ -56,10 +30,10 @@ function deleteData(id) {
         usersObjectStore = db.transaction(indexedDbStorage, "readwrite").objectStore(indexedDbStorage);
         usersObjectStore.delete(id);
     };
-    leerDatos();
+    readData();
 }
 
-function leerDatos() {
+function readData() {
     const tbody = document.getElementById("tbody");
     tbody.innerHTML = "</br>";
 
@@ -122,5 +96,5 @@ window.onload = function () {
     };
     document.getElementById("save").addEventListener("click", saveData);
     document.getElementById("aleatorio").addEventListener("click", fillRandomCocktail);
-    leerDatos();
+    readData();
 };

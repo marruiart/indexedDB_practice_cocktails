@@ -1,4 +1,6 @@
 import { allCocktails } from './cocktails.js';
+import { genRandomInt } from './genRandomInt.js';
+
 
 "use strict"
 
@@ -16,10 +18,6 @@ export function funGetCocktail() {
             document.getElementById("printstrDrinkThumb").src = data["drinks"][0]["strDrinkThumb"];
             document.getElementById("printstrDrinkThumb").alt = data["drinks"][0]["strDrink"];
         });
-}
-
-function genRandomInt(min, max) {
-    return Math.floor(Math.random() * ((max + 1) - min) + min);
 }
 
 export function fillRandomCocktail() {
