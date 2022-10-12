@@ -11,7 +11,6 @@
 
 	<!-- Modules import -->
 	<script src="./scripts/main.js" type="module"></script>
-	<script src="./scripts/loadAPIs.js" type="module"></script>
 
 	<!-- Fonts & icons -->
 	<script src="https://kit.fontawesome.com/2e84e4fa5d.js" crossorigin="anonymous"></script>
@@ -39,12 +38,17 @@
 
 				<thead class="--bg_enfasis_c --white">
 					<tr>
-						<th> <input type="text" id="strDrink" size="15" placeholder="StrDrink..." required /> </td>
-						<th> <input type="text" id="strAlcoholic" size="15" placeholder="StrAlcoholic..." required />
+						<th>
+							<input type="text" id="strDrink" size="15" placeholder="StrDrink..." required />
+						<th>
+							<input type="text" id="strAlcoholic" size="15" placeholder="StrAlcoholic..." required />
 						</th>
-						<th> <input type="text" id="strDrinkThumb" size="15" placeholder="Planeta..." required /> </th>
-						<th> <input type="text" id="strInstructions" size="15" placeholder="Instrucciones..."
-								required /> </th>
+						<th>
+							<input type="text" id="strDrinkThumb" size="15" placeholder="Planeta..." required />
+						</th>
+						<th>
+							<input type="text" id="strInstructions" size="15" placeholder="Instrucciones..." required />
+						</th>
 
 						<th>
 							<input type="button" id="save" value="save" />
@@ -53,7 +57,7 @@
 					</tr>
 				</thead>
 
-				<tbody id="cuerpo">
+				<tbody id="tbody">
 
 
 				</tbody>
@@ -62,15 +66,15 @@
 
 			<section class="cocktail">
 				<div class="cocktail__info">
-					<h2 id="strDrink" class="h2"></h2>
-					<p id="strAlcoholic"></p>
+					<h2 id="printstrDrink" class="h2"></h2>
+					<p id="printstrAlcoholic"></p>
 				</div>
 				<div class="cocktail__img">
-					<img id="strDrinkThumb" class="cocktail__img__img" src="" alt="">
+					<img id="printstrDrinkThumb" class="cocktail__img__img" src="" alt="">
 				</div>
 			</section>
 
-			<button type="button" id="getcocktail">Click</button>
+			<button type="button" id="getRandomCocktail">Random cocktail</button>
 
 		</main>
 

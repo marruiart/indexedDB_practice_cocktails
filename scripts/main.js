@@ -1,4 +1,4 @@
-import { funGetCocktail } from './loadAPIs.js';
+import { funGetCocktail, fillRandomCocktail } from './loadAPIs.js';
 
 'use strict';
 
@@ -38,17 +38,18 @@ function saveData() {
     const strDrink = document.getElementById("strDrink").value;
     const strAlcoholic = document.getElementById("strAlcoholic").value;
     const strDrinkThumb = document.getElementById("strDrinkThumb").value;
+    const strInstructions = document.getElementById("strInstructions").value;
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
         db = event.target.result;
         usersObjectStore = db.transaction(indexedDbStorage, "readwrite").objectStore(indexedDbStorage);
-        usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb });
+        usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb, strInstructions });
     };
     leerDatos();
 }
 
-function borrarDatos(id) {
+function deleteData(id) {
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
         db = event.target.result;
@@ -59,8 +60,8 @@ function borrarDatos(id) {
 }
 
 function leerDatos() {
-    const cuerpo = document.getElementById("cuerpo");
-    cuerpo.innerHTML = "Los datos almacenados son: <br />";
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "<br />";
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -70,44 +71,45 @@ function leerDatos() {
             let usuarios = event.target.result;
             console.log(usuarios);
             usuarios.forEach(element => {
-                var linea = document.createElement("tr"), // creo una fila
-                    campoStrDrink = document.createElement("td"), // creo una celda para el strDrink
-                    campoStrAlcoholic = document.createElement("td"), // creo una celda para la strAlcoholic
-                    campoStrDrinkThumb = document.createElement("td"), // creo una celda para el strDrinkThumb
-                    strInstructions = document.createElement("td"), // creo una celda para el strDrinkThumb
+                var row = document.createElement("tr"),
+                    /* Creating fields for elements */
+                    fieldStrDrink = document.createElement("td"),
+                    fieldStrAlcoholic = document.createElement("td"),
+                    fieldStrDrinkThumb = document.createElement("td"),
+                    strInstructions = document.createElement("td"),
+                    fieldDelete = document.createElement("td"),
+                    deleteButton = document.createElement("button"), // creo un botón
+                    imagenDelete = document.createElement("img"); // creo una imagen
 
-                    campoBorrar = document.createElement("td"), // creo una celda para el botón 'borrar'
-                    botonBorrar = document.createElement("button"), // creo un botón
-                    imagenBorrar = document.createElement("img"); // creo una imagen
+                fieldStrDrink.innerHTML = element.strDrink; // escribo el strDrink contenido en el array
+                fieldStrAlcoholic.innerHTML = element.strAlcoholic; // escribo la strAlcoholic contenida en el array
+                fieldStrDrinkThumb.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
+                strInstructions.innerHTML = element.strInstructions; // escribo el strDrinkThumb contenido en el array
 
-                campoStrDrink.innerHTML = element.strDrink; // escribo el strDrink contenido en el array
-                campoStrAlcoholic.innerHTML = element.strAlcoholic; // escribo la strAlcoholic contenida en el array
-                campoStrDrinkThumb.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
-                strInstructions.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
-
-                botonBorrar.innerHTML = '<i class="fa-solid fa-trash"></i>' // etiqueto el botón
-                botonBorrar.className = "borrar"; // asigno el botón a una clase
-                botonBorrar.addEventListener('click', function () { // añado al botón un evento de escucha (listener)
-                    borrarDatos(element.id); // la función 'forEach' tiene una variable 'posición', la cuál uso para saber el elemento que he de borrar
+                deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>' // etiqueto el botón
+                deleteButton.className = "delete"; // asigno el botón a una clase
+                deleteButton.addEventListener('click', function () { // añado al botón un evento de escucha (listener)
+                    deleteData(element.id); // la función 'forEach' tiene una variable 'posición', la cuál uso para saber el elemento que he de delete
                 });
 
-                botonBorrar.appendChild(imagenBorrar); // añado la imagen al botón
-                campoBorrar.appendChild(botonBorrar); // añado el botón a la celda
+                deleteButton.appendChild(imagenDelete); // añado la imagen al botón
+                fieldDelete.appendChild(deleteButton); // añado el botón a la celda
 
-                linea.appendChild(campoStrDrink); // añado a la línea la celda con el strDrink
-                linea.appendChild(campoStrAlcoholic); // añado a la línea la celda con la strAlcoholic
-                linea.appendChild(campoStrDrinkThumb); // añado a la línea la celda con el strDrinkThumb
-                linea.appendChild(strInstructions); // añado a la línea la celda con el strDrinkThumb
-                linea.appendChild(campoBorrar); // añado a la línea la celda con el botón
+                /* Add the rows with each element */
+                row.appendChild(fieldStrDrink);
+                row.appendChild(fieldStrAlcoholic);
+                row.appendChild(fieldStrDrinkThumb);
+                row.appendChild(strInstructions);
+                row.appendChild(fieldDelete);
 
-                cuerpo.appendChild(linea); // añado al tbody 'cuerpo' la línea
+                tbody.appendChild(row); // añado al tbody 'tbody' la línea
             });
         };
     };
 }
 
 window.onload = function () {
-    document.getElementById("getcocktail").addEventListener("click", funGetCocktail);
+    document.getElementById("getRandomCocktail").addEventListener("click", funGetCocktail);
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion); // SI EXISTE LA ABRE, SI NO LA CREA
     requestDB.onupgradeneeded = function (event) {
@@ -116,9 +118,10 @@ window.onload = function () {
         objectStore.createIndex("strDrink_index", "strDrink", { unique: false });
         objectStore.createIndex("strAlcoholic_index", "strAlcoholic", { unique: false });
         objectStore.createIndex("strDrinkThumb_index", "strDrinkThumb", { unique: false });
+        objectStore.createIndex("strInstructions_index", "strInstructions", { unique: false });
 
     };
     document.getElementById("save").addEventListener("click", saveData);
-    document.getElementById("aleatorio").addEventListener("click", generarPersonaje);
+    document.getElementById("aleatorio").addEventListener("click", fillRandomCocktail);
     leerDatos();
 };
