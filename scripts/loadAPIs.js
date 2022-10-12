@@ -1,3 +1,5 @@
+import { allCocktails } from './cocktails.js';
+
 "use strict"
 
 export function funGetCocktail() {
@@ -16,19 +18,26 @@ export function funGetCocktail() {
         });
 }
 
-export function fillRandomCocktail() {
-    document.getElementById("strAlcoholic").innerHTML = "";
-    document.getElementById("strDrink").innerHTML = "";
-    document.getElementById("strDrinkThumb").innerHTML = "";
+function genRandomInt(min, max) {
+    return Math.floor(Math.random() * ((max + 1) - min) + min);
+}
 
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=old+fashioned')
+export function fillRandomCocktail() {
+    let inputStrAlcoholic = document.getElementById("inputStrAlcoholic");
+    let inputStrDrink = document.getElementById("inputStrDrink");
+    let inputStrDrinkThumb = document.getElementById("inputStrDrinkThumb");
+    let inputStrInstructions = document.getElementById("inputStrInstructions");
+
+    let n = genRandomInt(0, 643);
+
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+ allCocktails[n])
         .then(response => response.json())
         .then((data) => {
             console.log(data);
-            document.getElementById("strDrink").value = data["drinks"][0]["strDrink"];
-            document.getElementById("strAlcoholic").value = data["drinks"][0]["strAlcoholic"] + " drink";
-            document.getElementById("strDrinkThumb").value = data["drinks"][0]["strDrinkThumb"];
-            document.getElementById("strInstructions").value = data["drinks"][0]["strInstructions"];
+            inputStrAlcoholic.value = data["drinks"][0]["strDrink"];
+            inputStrDrink.value = data["drinks"][0]["strAlcoholic"] + " drink";
+            inputStrDrinkThumb.value = data["drinks"][0]["strDrinkThumb"];
+            inputStrInstructions.value = data["drinks"][0]["strInstructions"];
         });
 }
 

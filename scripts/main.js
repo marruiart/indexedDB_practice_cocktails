@@ -35,10 +35,10 @@ function generarPersonaje() {
 }
 
 function saveData() {
-    const strDrink = document.getElementById("strDrink").value;
-    const strAlcoholic = document.getElementById("strAlcoholic").value;
-    const strDrinkThumb = document.getElementById("strDrinkThumb").value;
-    const strInstructions = document.getElementById("strInstructions").value;
+    const strDrink = document.getElementById("inputStrDrink").value;
+    const strAlcoholic = document.getElementById("inputStrAlcoholic").value;
+    const strDrinkThumb = document.getElementById("inputStrDrinkThumb").value;
+    const strInstructions = document.getElementById("inputStrInstructions").value;
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -61,7 +61,7 @@ function deleteData(id) {
 
 function leerDatos() {
     const tbody = document.getElementById("tbody");
-    tbody.innerHTML = "<br />";
+    tbody.innerHTML = "</br>";
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -72,37 +72,36 @@ function leerDatos() {
             console.log(usuarios);
             usuarios.forEach(element => {
                 var row = document.createElement("tr"),
-                    /* Creating fields for elements */
                     fieldStrDrink = document.createElement("td"),
                     fieldStrAlcoholic = document.createElement("td"),
                     fieldStrDrinkThumb = document.createElement("td"),
-                    strInstructions = document.createElement("td"),
+                    fieldStrInstructions = document.createElement("td"),
                     fieldDelete = document.createElement("td"),
-                    deleteButton = document.createElement("button"), // creo un botón
-                    imagenDelete = document.createElement("img"); // creo una imagen
+                    deleteButton = document.createElement("button"),
+                    cocktailImg = document.createElement("img");
 
-                fieldStrDrink.innerHTML = element.strDrink; // escribo el strDrink contenido en el array
-                fieldStrAlcoholic.innerHTML = element.strAlcoholic; // escribo la strAlcoholic contenida en el array
-                fieldStrDrinkThumb.innerHTML = element.strDrinkThumb; // escribo el strDrinkThumb contenido en el array
-                strInstructions.innerHTML = element.strInstructions; // escribo el strDrinkThumb contenido en el array
+                fieldStrDrink.innerHTML = element.strDrink;
+                fieldStrAlcoholic.innerHTML = element.strAlcoholic;
+                cocktailImg.src = element.strDrinkThumb;
+                cocktailImg.className = "tableImg";
+                fieldStrInstructions.innerHTML = element.strInstructions;
 
-                deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>' // etiqueto el botón
-                deleteButton.className = "delete"; // asigno el botón a una clase
-                deleteButton.addEventListener('click', function () { // añado al botón un evento de escucha (listener)
-                    deleteData(element.id); // la función 'forEach' tiene una variable 'posición', la cuál uso para saber el elemento que he de delete
+                deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                deleteButton.className = "delete";
+                deleteButton.addEventListener('click', function () {
+                    deleteData(element.id);
                 });
 
-                deleteButton.appendChild(imagenDelete); // añado la imagen al botón
-                fieldDelete.appendChild(deleteButton); // añado el botón a la celda
+                fieldStrDrinkThumb.appendChild(cocktailImg);
+                fieldDelete.appendChild(deleteButton);
 
-                /* Add the rows with each element */
                 row.appendChild(fieldStrDrink);
                 row.appendChild(fieldStrAlcoholic);
                 row.appendChild(fieldStrDrinkThumb);
-                row.appendChild(strInstructions);
+                row.appendChild(fieldStrInstructions);
                 row.appendChild(fieldDelete);
 
-                tbody.appendChild(row); // añado al tbody 'tbody' la línea
+                tbody.appendChild(row);
             });
         };
     };

@@ -250,6 +250,10 @@ tbody>tr:nth-child(odd) {
     border-bottom: 1px solid white;
 }
 
+.tableImg {
+    width: 50%;
+}
+
 /* FORMS */
 
 .form {
