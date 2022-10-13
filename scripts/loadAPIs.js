@@ -1,8 +1,9 @@
-import { allCocktails } from './cocktails.js';
-import { genRandomInt } from './genRandomInt.js';
-
-
 "use strict"
+
+import { allCocktails } from './cocktailNames.js';
+import { genRandomInt } from './genRandomInt.js';
+import { displayData } from './main.js';
+import { Cocktail } from './CLASSES/Cocktail.js';
 
 export function funGetCocktail() {
     document.getElementById("strAlcoholic").innerHTML = "";
@@ -12,7 +13,6 @@ export function funGetCocktail() {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=old+fashioned')
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
             document.getElementById("printstrDrink").innerHTML = data["drinks"][0]["strDrink"];
             document.getElementById("printstrAlcoholic").innerHTML = data["drinks"][0]["strAlcoholic"] + " drink";
             document.getElementById("printstrDrinkThumb").src = data["drinks"][0]["strDrinkThumb"];
@@ -21,23 +21,39 @@ export function funGetCocktail() {
 }
 
 export function fillRandomCocktail() {
-    let inputStrAlcoholic = document.getElementById("inputStrAlcoholic");
     let inputStrDrink = document.getElementById("inputStrDrink");
+    let inputStrAlcoholic = document.getElementById("inputStrAlcoholic");
     let inputStrDrinkThumb = document.getElementById("inputStrDrinkThumb");
     let inputStrInstructions = document.getElementById("inputStrInstructions");
 
-    let n = genRandomInt(0, 643);
+    let n = genRandomInt(0, allCocktails.length);
 
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+ allCocktails[n])
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + allCocktails[n])
         .then(response => response.json())
         .then((data) => {
-            console.log(data);
-            inputStrAlcoholic.value = data["drinks"][0]["strDrink"];
-            inputStrDrink.value = data["drinks"][0]["strAlcoholic"] + " drink";
+            inputStrDrink.value = data["drinks"][0]["strDrink"];
+            inputStrAlcoholic.value = data["drinks"][0]["strAlcoholic"] + " drink";
             inputStrDrinkThumb.value = data["drinks"][0]["strDrinkThumb"];
             inputStrInstructions.value = data["drinks"][0]["strInstructions"];
         });
 }
 
+export function listCocktailsByFirstLetter(letter) {
+    let cocktailsByLetter = [];
 
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=' + letter)
+        .then(response => response.json())
+        .then((data) => {
+            for (let c in data["drinks"]) {
+                let cocktail = new Cocktail(data["drinks"][c]["strDrink"],
+                    data["drinks"][c]["strAlcoholic"] + " drink",
+                    data["drinks"][c]["strDrinkThumb"],
+                    data["drinks"][c]["strInstructions"]);
+                cocktailsByLetter.push(cocktail);
+                console.log(cocktailsByLetter);
+            }
+        });
+    console.log(cocktailsByLetter);
+    displayData(cocktailsByLetter);
+}
 

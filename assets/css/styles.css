@@ -195,6 +195,14 @@ h1>img {
     box-shadow: 0 -10px 10px #8888882d;
 }
 
+#main_table {
+    display: flex;
+}
+
+.letter_table {
+    display: none;
+}
+
 /* TABLES */
 
 table {

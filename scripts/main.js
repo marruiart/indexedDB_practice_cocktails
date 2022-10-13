@@ -1,4 +1,6 @@
-import { funGetCocktail, fillRandomCocktail } from './loadAPIs.js';
+import { funGetCocktail, fillRandomCocktail, listCocktailsByFirstLetter } from './loadAPIs.js';
+import { hideElements } from './hideElements.js';
+import { Cocktail } from './CLASSES/Cocktail.js';
 
 'use strict';
 
@@ -9,10 +11,11 @@ var indexedDbStorage = "cocktail";
 
 
 function saveData() {
-    const strDrink = document.getElementById("inputStrDrink").value;
-    const strAlcoholic = document.getElementById("inputStrAlcoholic").value;
-    const strDrinkThumb = document.getElementById("inputStrDrinkThumb").value;
-    const strInstructions = document.getElementById("inputStrInstructions").value;
+    const strDrink = document.getElementById("inputStrDrink").value,
+        strAlcoholic = document.getElementById("inputStrAlcoholic").value,
+        strDrinkThumb = document.getElementById("inputStrDrinkThumb").value,
+        strInstructions = document.getElementById("inputStrInstructions").value;
+    let cocktail = intanceCocktail(strDrink, strAlcoholic, strDrinkThumb, strInstructions);
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -21,6 +24,19 @@ function saveData() {
         usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb, strInstructions });
     };
     readData();
+    document.getElementById("inputStrDrink").value = "";
+    document.getElementById("inputStrAlcoholic").value = "";
+    document.getElementById("inputStrDrinkThumb").value = "";
+    document.getElementById("inputStrInstructions").value = "";
+}
+
+function intanceCocktail(strDrink, strAlcoholic, strDrinkThumb, strInstructions) {
+    let cocktail = new Cocktail;
+    cocktail.strDrink = strDrink;
+    cocktail.strAlcoholic = strAlcoholic;
+    cocktail.strDrinkThumb = strDrinkThumb;
+    cocktail.strInstructions = strInstructions;
+    return cocktail;
 }
 
 function deleteData(id) {
@@ -43,7 +59,6 @@ function readData() {
         usersObjectStore = db.transaction(indexedDbStorage, "readonly").objectStore(indexedDbStorage);
         usersObjectStore.getAll().onsuccess = function (event) {
             let usuarios = event.target.result;
-            console.log(usuarios);
             usuarios.forEach(element => {
                 var row = document.createElement("tr"),
                     fieldStrDrink = document.createElement("td"),
@@ -81,8 +96,31 @@ function readData() {
     };
 }
 
+export function displayData(cocktailsByLetter) {
+    const CONTAINER = document.getElementById("cocktails_container");
+    CONTAINER.innerHTML = "</br>";
+
+    /*     cocktailsByLetter.forEach(element => {
+            var card = document.createElement("div"),
+                fieldStrDrink = document.createElement("h2"),
+                fieldStrAlcoholic = document.createElement("p"),
+                cocktailImg = document.createElement("img");
+    
+            cocktailImg.src = element.strDrinkThumb;
+            cocktailImg.className = "tableImg";
+            cocktailImg.alt = element.strAlcoholic;
+            fieldStrDrink.innerHTML = element.strDrink;
+            fieldStrAlcoholic.innerHTML = element.strAlcoholic;
+    
+            card.appendChild(fieldStrDrink);
+            card.appendChild(fieldStrAlcoholic);
+            card.appendChild(cocktailImg);
+    
+            CONTAINER.appendChild(card);
+        }); */
+};
+
 window.onload = function () {
-    document.getElementById("getRandomCocktail").addEventListener("click", funGetCocktail);
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion); // SI EXISTE LA ABRE, SI NO LA CREA
     requestDB.onupgradeneeded = function (event) {
@@ -95,6 +133,13 @@ window.onload = function () {
 
     };
     document.getElementById("save").addEventListener("click", saveData);
-    document.getElementById("aleatorio").addEventListener("click", fillRandomCocktail);
+    document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
+    let showMainTable = document.getElementById("showMainTable")
+    let sortByLetterTable = document.getElementsByClassName("sortByLetterTable");
+    showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
+    for (let i = 0; i < sortByLetterTable.length; i++) {
+        sortByLetterTable[i].addEventListener("click", function () { hideElements(sortByLetterTable[i].id) });
+        sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter(sortByLetterTable[i].id) });
+    }
     readData();
 };

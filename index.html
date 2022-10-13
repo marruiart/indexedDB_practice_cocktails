@@ -29,11 +29,37 @@
 
 		<menu class="menu">
 			<div class="menu__div">
-				<a href="#" class="button--menu">Cocktails</a>
+				<a href="#" id="showMainTable" class="button--menu">Favourite Cocktails</a>
+				<a href="#" id="a" class="sortByLetterTable button--menu">A</a>
+				<a href="#" id="b" class="sortByLetterTable button--menu">B</a>
+				<a href="#" id="c" class="sortByLetterTable button--menu">C</a>
+				<a href="#" id="d" class="sortByLetterTable button--menu">D</a>
+				<a href="#" id="e" class="sortByLetterTable button--menu">E</a>
+				<a href="#" id="f" class="sortByLetterTable button--menu">F</a>
+				<a href="#" id="g" class="sortByLetterTable button--menu">G</a>
+				<a href="#" id="h" class="sortByLetterTable button--menu">H</a>
+				<a href="#" id="i" class="sortByLetterTable button--menu">I</a>
+				<a href="#" id="j" class="sortByLetterTable button--menu">J</a>
+				<a href="#" id="k" class="sortByLetterTable button--menu">K</a>
+				<a href="#" id="l" class="sortByLetterTable button--menu">L</a>
+				<a href="#" id="m" class="sortByLetterTable button--menu">M</a>
+				<a href="#" id="n" class="sortByLetterTable button--menu">N</a>
+				<a href="#" id="o" class="sortByLetterTable button--menu">O</a>
+				<a href="#" id="p" class="sortByLetterTable button--menu">P</a>
+				<a href="#" id="q" class="sortByLetterTable button--menu">Q</a>
+				<a href="#" id="r" class="sortByLetterTable button--menu">R</a>
+				<a href="#" id="s" class="sortByLetterTable button--menu">S</a>
+				<a href="#" id="t" class="sortByLetterTable button--menu">T</a>
+				<a href="#" id="u" class="sortByLetterTable button--menu">U</a>
+				<a href="#" id="v" class="sortByLetterTable button--menu">V</a>
+				<a href="#" id="w" class="sortByLetterTable button--menu">W</a>
+				<a href="#" id="x" class="sortByLetterTable button--menu">X</a>
+				<a href="#" id="y" class="sortByLetterTable button--menu">Y</a>
+				<a href="#" id="z" class="sortByLetterTable button--menu">Z</a>
 			</div>
 		</menu>
 
-		<main class="main --bg_light_bg_c">
+		<main id="main_table" class="main --bg_light_bg_c">
 			<table id="tabla" class="filas">
 
 				<thead class="--bg_enfasis_c --white">
@@ -54,14 +80,13 @@
 
 						<th>
 							<input type="button" id="save" value="save" />
-							<button id="aleatorio">Random cocktail</button>
+							<button id="getRandomCocktail">Random cocktail</button>
 						</th>
 					</tr>
 				</thead>
 
 				<tbody id="tbody">
-
-
+					<!-- The table will be generated with js -->
 				</tbody>
 
 			</table>
@@ -75,12 +100,13 @@
 					<img id="printstrDrinkThumb" class="cocktail__img__img" src="" alt="">
 				</div>
 			</section>
-
-			<p id="arrayCocktail"></p>
-
-			<button type="button" id="getRandomCocktail">Random cocktail</button>
-
 		</main>
+
+		<main id="letter_table" class="main --bg_light_bg_c">
+			<div id="cocktails_container">
+			</div>
+		</main>
+
 
 	</div>
 
