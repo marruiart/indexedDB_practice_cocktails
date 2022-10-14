@@ -381,6 +381,12 @@ tbody>tr:nth-child(odd) {
     margin: 1em 1em 1em 0;
 }
 
+/* One cocktail details */
+
+#selected_cocktail_container {
+    min-height: 50vh;
+}
+
 /* Cocktails by first letter */
 
 #cocktails_container {
@@ -427,13 +433,13 @@ tbody>tr:nth-child(odd) {
     transition: 500ms all;
 }
 
-.galleryImg {
+.gallery_img {
     width: 80%;
 }
 
 /*------------------------------------------ FOOTER ------------------------------------------*/
 
-.footer {
+footer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -441,13 +447,26 @@ tbody>tr:nth-child(odd) {
     width: 100%;
 }
 
-.footer div {
+.footer__div {
     display: flex;
-    justify-content: space-between;
-    width: 15%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
     height: 100%;
 }
 
-.footer div * {
+.footer__div>span {
+    margin: 1em;
+}
+
+.footer__div__social {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    font-size: 2em;
+}
+
+.footer__div * {
     color: white;
 }

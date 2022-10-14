@@ -18,7 +18,7 @@ export function displayOneCocktail(cocktail) {
     fieldStrAlcoholic.className = "alcohol_info";
     strInstructions.innerHTML = cocktail.strInstructions;
     cocktailImg.src = cocktail.strDrinkThumb;
-    cocktailImg.className = "galleryImg";
+    cocktailImg.className = "gallery_img";
     cocktailImg.alt = cocktail.strAlcoholic;
     favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
     favouriteButton.className = "button--favourite";
@@ -51,7 +51,7 @@ export function displayGallery(cocktailsByLetter) {
         fieldStrDrink.className = "cocktail_name";
         fieldStrAlcoholic.innerHTML = cocktail.strAlcoholic;
         cocktailImg.src = cocktail.strDrinkThumb;
-        cocktailImg.className = "galleryImg";
+        cocktailImg.className = "gallery_img";
         cocktailImg.alt = cocktail.strAlcoholic;
         favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
         favouriteButton.className = "button--favourite";
