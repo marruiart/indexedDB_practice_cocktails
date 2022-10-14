@@ -1,6 +1,6 @@
 "use strict"
 
-import { displayData } from './main.js';
+import { displayGallery } from './displayGallery.js';
 import { Cocktail } from './CLASSES/Cocktail.js';
 
 export function getCocktailByName(name) {
@@ -32,7 +32,7 @@ export function listCocktailsByFirstLetter(letter) {
                 cocktailsByLetter.push(cocktail);
             }
             Promise.all(cocktailsByLetter).then(cocktailsByLetter.forEach(element => {
-                displayData(cocktailsByLetter);
+                displayGallery(cocktailsByLetter);
             }))
         });
 
