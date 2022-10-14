@@ -11,7 +11,7 @@ var indexedDbVersion = 1;
 var indexedDbStorage = "cocktail";
 
 
-function saveFavourite(input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
+export function saveFavourite (input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
     let strDrink = input_strDrink,
         strAlcoholic = input_strAlcoholic,
         strDrinkThumb = input_strDrinkThumb,

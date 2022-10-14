@@ -314,6 +314,10 @@ tbody>tr:nth-child(odd) {
     border-radius: 5px;
 }
 
+.input.--small {
+    width: 40%;
+}
+
 .input:focus {
     background-color: #f8f8f8;
     box-shadow: 5px 5px 5px #dedede inset;
@@ -439,10 +443,8 @@ tbody>tr:nth-child(odd) {
 
 .footer div {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
+    justify-content: space-between;
+    width: 15%;
     height: 100%;
 }
 
