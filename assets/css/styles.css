@@ -8,7 +8,7 @@
 :root {
     --header_c: #111111;
     --titles_c: #eeeeee;
-    --subheader_c: #091034;
+    --subheader_c: #FEFE33;
     --enfasis_c: #ff2058;
     --light_enfasis_c: #ff557f;
     --light_bg_c: #F8F7ED;
@@ -224,6 +224,7 @@ tr {
 
 th,
 td {
+    text-align: center;
     width: 100%;
     min-width: 130px;
     padding: 0.7em;
@@ -320,11 +321,7 @@ tbody>tr:nth-child(odd) {
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 3em;
-    width: fit-content;
     min-width: 40px;
     padding: 0 1em;
     background-color: var(--header_c);
@@ -339,6 +336,32 @@ tbody>tr:nth-child(odd) {
 
 .button:hover {
     background-color: var(--subheader_c);
+    color: var(--header_c);
+    border: none;
+}
+
+.button--icon {
+    border: none;
+    color: var(--header_c);
+    background-color: transparent;
+    font-size: 2em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 100ms all;
+}
+
+.button--favourite {
+    border: none;
+    color: var(--header_c);
+    background-color: transparent;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 100ms all;
+}
+
+.button--icon:hover {
+    color: var(--enfasis_c);
     border: none;
 }
 
@@ -362,8 +385,38 @@ tbody>tr:nth-child(odd) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 0.7em;
+    margin: 1em 0.7em;
     width: 31%;
+}
+
+.button--favourite {
+    border: none;
+    color: var(--header_c);
+    background-color: transparent;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 100ms all;
+}
+
+.button--favourite:hover {
+    color: var(--light_bg_c);
+    border: none;
+}
+
+.cocktail_name {
+    display: flex;
+    justify-content: space-around;
+    height: 1.2em;
+    width: 80%;
+    margin: 0 0.2em;
+    padding: 0 1em;
+    color: white;
+    background-color: var(--light_enfasis_c);
+    border: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: 500ms all;
 }
 
 .galleryImg {

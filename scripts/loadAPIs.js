@@ -3,12 +3,12 @@
 import { displayData } from './main.js';
 import { Cocktail } from './CLASSES/Cocktail.js';
 
-export function funGetCocktail() {
+export function getCocktailByName(name) {
     document.getElementById("strAlcoholic").innerHTML = "";
     document.getElementById("strDrink").innerHTML = "";
     document.getElementById("strDrinkThumb").innerHTML = "";
 
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=old+fashioned')
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
         .then(response => response.json())
         .then((data) => {
             document.getElementById("printstrDrink").innerHTML = data["drinks"][0]["strDrink"];

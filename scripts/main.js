@@ -81,7 +81,7 @@ function readData() {
                 fieldStrInstructions.innerHTML = element.strInstructions;
 
                 deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-                deleteButton.className = "delete";
+                deleteButton.className = "button--icon";
                 deleteButton.addEventListener('click', function () {
                     deleteCocktail(element.id);
                 });
@@ -113,20 +113,21 @@ export function displayData(cocktailsByLetter) {
 
         card.className = "card";
         fieldStrDrink.innerHTML = element.strDrink;
+        fieldStrDrink.className = "cocktail_name";
         fieldStrAlcoholic.innerHTML = element.strAlcoholic;
         cocktailImg.src = element.strDrinkThumb;
         cocktailImg.className = "galleryImg";
         cocktailImg.alt = element.strAlcoholic;
         favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
-        favouriteButton.className = "saveFavourite";
+        favouriteButton.className = "button--favourite";
         favouriteButton.addEventListener('click', function () {
             saveFavourite(element.strDrink, element.strAlcoholic, element.strDrinkThumb, element.strInstructions);
         });
 
+        fieldStrDrink.appendChild(favouriteButton);
         card.appendChild(fieldStrDrink);
-        card.appendChild(favouriteButton);
-        card.appendChild(fieldStrAlcoholic);
         card.appendChild(cocktailImg);
+        card.appendChild(fieldStrAlcoholic);
 
         CONTAINER.appendChild(card);
     });
@@ -146,7 +147,7 @@ window.onload = function () {
     };
     document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
-    let showMainTable = document.getElementById("showMainTable")
+    let showMainTable = document.getElementById("showMainTable");
     let sortByLetterTable = document.getElementsByClassName("sortByLetterTable");
     showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
     for (let i = 0; i < sortByLetterTable.length; i++) {

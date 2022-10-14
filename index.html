@@ -11,6 +11,7 @@
 
 	<!-- Modules import -->
 	<script src="./scripts/main.js" type="module"></script>
+	<script src="./scripts/main.js" type="module"></script>
 
 	<!-- Fonts & icons -->
 	<script src="https://kit.fontawesome.com/2e84e4fa5d.js" crossorigin="anonymous"></script>
@@ -30,7 +31,7 @@
 
 		<menu class="menu">
 			<div class="menu__div">
-				<a href="#" id="showMainTable" class="button--menu">Favourite Cocktails</a>
+				<a href="#" id="showMainTable" class="button--menu"><i class="fa fa-heart"></i> &nbsp; Cocktails</a>
 				<a href="#" id="a" class="sortByLetterTable button--menu">A</a>
 				<a href="#" id="b" class="sortByLetterTable button--menu">B</a>
 				<a href="#" id="c" class="sortByLetterTable button--menu">C</a>
@@ -55,6 +56,7 @@
 				<a href="#" id="w" class="sortByLetterTable button--menu">W</a>
 				<a href="#" id="y" class="sortByLetterTable button--menu">Y</a>
 				<a href="#" id="z" class="sortByLetterTable button--menu">Z</a>
+
 			</div>
 		</menu>
 
@@ -64,27 +66,25 @@
 				<thead class="--bg_enfasis_c --white">
 					<tr>
 						<th>
-							<input type="text" id="inputStrDrink" size="15" placeholder="Título" required />
+							<input type="text" id="inputStrDrink" class="input" placeholder="Cocktail name" required />
 						<th>
-							<select name="StrAlcoholic" id="inputStrAlcoholic" required>
-								<option value=""></option>
+							<select name="StrAlcoholic" id="inputStrAlcoholic" class="input" required>
+								<option disabled selected>Alcoholic or non alcoholic?</option>
 								<option value="Alcoholic">Alcoholic</option>
 								<option value="Non alcoholic">Non alcoholic</option>
 							</select>
-							<!-- <input type="text" id="inputStrAlcoholic" size="15" placeholder="StrAlcoholic..."
-								required /> -->
 						</th>
 						<th>
-							<input type="text" id="inputStrDrinkThumb" size="15" placeholder="Planeta..." required />
+							<input type="text" id="inputStrDrinkThumb" class="input" placeholder="Image URL" required />
 						</th>
 						<th>
-							<input type="text" id="inputStrInstructions" size="15" placeholder="Instrucciones..."
+							<input type="text" id="inputStrInstructions" class="input" placeholder="Instructions..."
 								required />
 						</th>
 
 						<th>
-							<input type="button" id="save" value="save" />
-							<button id="getRandomCocktail">Random cocktail</button>
+							<button id="save" class="button" value="save">Save</button>
+							<button id="getRandomCocktail" class="button">Random</button>
 						</th>
 					</tr>
 				</thead>
@@ -95,19 +95,11 @@
 
 			</table>
 
-			<section class="cocktail">
-				<div class="cocktail__info">
-					<h2 id="printstrDrink" class="h2"></h2>
-					<p id="printstrAlcoholic"></p>
-				</div>
-				<div class="cocktail__img">
-					<img id="printstrDrinkThumb" class="cocktail__img__img" src="" alt="">
-				</div>
-			</section>
 		</main>
 
 		<main id="letter_table" class="main --bg_light_bg_c">
 			<div id="cocktails_container">
+				<!-- The gallery will be generated with js -->
 			</div>
 		</main>
 
