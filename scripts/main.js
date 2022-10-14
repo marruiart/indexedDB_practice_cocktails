@@ -1,6 +1,6 @@
-import { funGetCocktail, fillRandomCocktail, listCocktailsByFirstLetter } from './loadAPIs.js';
+import { listCocktailsByFirstLetter } from './loadAPIs.js';
+import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
-import { Cocktail } from './CLASSES/Cocktail.js';
 
 'use strict';
 
@@ -25,7 +25,7 @@ function saveFavourite(inputStrDrink, inputStrAlcoholic, inputStrDrinkThumb, inp
     readData();
 }
 
-function saveData() {
+function saveCocktail() {
     const strDrink = document.getElementById("inputStrDrink").value,
         strAlcoholic = document.getElementById("inputStrAlcoholic").value,
         strDrinkThumb = document.getElementById("inputStrDrinkThumb").value,
@@ -44,7 +44,7 @@ function saveData() {
     document.getElementById("inputStrInstructions").value = "";
 }
 
-function deleteData(id) {
+function deleteCocktail(id) {
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
         db = event.target.result;
@@ -83,7 +83,7 @@ function readData() {
                 deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
                 deleteButton.className = "delete";
                 deleteButton.addEventListener('click', function () {
-                    deleteData(element.id);
+                    deleteCocktail(element.id);
                 });
 
                 fieldStrDrinkThumb.appendChild(cocktailImg);
@@ -144,7 +144,7 @@ window.onload = function () {
         objectStore.createIndex("strInstructions_index", "strInstructions", { unique: false });
 
     };
-    document.getElementById("save").addEventListener("click", saveData);
+    document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
     let showMainTable = document.getElementById("showMainTable")
     let sortByLetterTable = document.getElementsByClassName("sortByLetterTable");
