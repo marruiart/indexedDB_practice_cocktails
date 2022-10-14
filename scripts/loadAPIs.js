@@ -1,20 +1,17 @@
 "use strict"
 
-import { displayGallery } from './displayGallery.js';
+import { displayGallery, displayOneCocktail } from './displayGallery.js';
 import { Cocktail } from './CLASSES/Cocktail.js';
 
 export function getCocktailByName(name) {
-    document.getElementById("strAlcoholic").innerHTML = "";
-    document.getElementById("strDrink").innerHTML = "";
-    document.getElementById("strDrinkThumb").innerHTML = "";
-
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
         .then(response => response.json())
         .then((data) => {
-            document.getElementById("printstrDrink").innerHTML = data["drinks"][0]["strDrink"];
-            document.getElementById("printstrAlcoholic").innerHTML = data["drinks"][0]["strAlcoholic"] + " drink";
-            document.getElementById("printstrDrinkThumb").src = data["drinks"][0]["strDrinkThumb"];
-            document.getElementById("printstrDrinkThumb").alt = data["drinks"][0]["strDrink"];
+            let cocktail = new Cocktail(data["drinks"][0]["strDrink"],
+                data["drinks"][0]["strAlcoholic"],
+                data["drinks"][0]["strDrinkThumb"],
+                data["drinks"][0]["strInstructions"]);
+            displayOneCocktail(cocktail);
         });
 }
 

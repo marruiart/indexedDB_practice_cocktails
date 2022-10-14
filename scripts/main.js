@@ -1,6 +1,7 @@
-import { listCocktailsByFirstLetter } from './loadAPIs.js';
+import { getCocktailByName, listCocktailsByFirstLetter } from './loadAPIs.js';
 import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
+import { fillOptions } from './fillOptions.js';
 
 'use strict';
 
@@ -10,11 +11,11 @@ var indexedDbVersion = 1;
 var indexedDbStorage = "cocktail";
 
 
-function saveFavourite(inputStrDrink, inputStrAlcoholic, inputStrDrinkThumb, inputStrInstructions) {
-    let strDrink = inputStrDrink,
-        strAlcoholic = inputStrAlcoholic,
-        strDrinkThumb = inputStrDrinkThumb,
-        strInstructions = inputStrInstructions;
+function saveFavourite(input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
+    let strDrink = input_strDrink,
+        strAlcoholic = input_strAlcoholic,
+        strDrinkThumb = input_strDrinkThumb,
+        strInstructions = input_strInstructions;
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -26,10 +27,10 @@ function saveFavourite(inputStrDrink, inputStrAlcoholic, inputStrDrinkThumb, inp
 }
 
 function saveCocktail() {
-    const strDrink = document.getElementById("inputStrDrink").value,
-        strAlcoholic = document.getElementById("inputStrAlcoholic").value,
-        strDrinkThumb = document.getElementById("inputStrDrinkThumb").value,
-        strInstructions = document.getElementById("inputStrInstructions").value;
+    const strDrink = document.getElementById("input_strDrink").value,
+        strAlcoholic = document.getElementById("input_strAlcoholic").value,
+        strDrinkThumb = document.getElementById("input_strDrinkThumb").value,
+        strInstructions = document.getElementById("input_strInstructions").value;
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -38,10 +39,10 @@ function saveCocktail() {
         usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb, strInstructions });
     };
     readData();
-    document.getElementById("inputStrDrink").value = "";
-    document.getElementById("inputStrAlcoholic").value = "";
-    document.getElementById("inputStrDrinkThumb").value = "";
-    document.getElementById("inputStrInstructions").value = "";
+    document.getElementById("input_strDrink").value = "";
+    document.getElementById("input_strAlcoholic").value = "";
+    document.getElementById("input_strDrinkThumb").value = "";
+    document.getElementById("input_strInstructions").value = "";
 }
 
 function deleteCocktail(id) {
@@ -55,8 +56,8 @@ function deleteCocktail(id) {
 }
 
 function readData() {
-    const tbody = document.getElementById("tbody");
-    tbody.innerHTML = "</br>";
+    const TBODY = document.getElementById("tbody");
+    TBODY.innerHTML = "</br>";
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -95,7 +96,7 @@ function readData() {
                 row.appendChild(fieldStrInstructions);
                 row.appendChild(fieldDelete);
 
-                tbody.appendChild(row);
+                TBODY.appendChild(row);
             });
         };
     };
@@ -115,9 +116,17 @@ window.onload = function () {
     };
     document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
+    let select_first_letter = document.getElementById("select_first_letter");
+    let options_select = document.getElementById("options_select");
+    let button_select_by_name = document.getElementById("button_select_by_name");
+
     let showMainTable = document.getElementById("showMainTable");
+    let showSearch = document.getElementById("showSearch");
     let sortByLetterTable = document.getElementsByClassName("sortByLetterTable");
+    select_first_letter.addEventListener("click", function () { fillOptions(select_first_letter.value) });
+    button_select_by_name.addEventListener("click", function () { getCocktailByName(options_select.value) });
     showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
+    showSearch.addEventListener("click", function () { hideElements(showSearch.id) });
     for (let i = 0; i < sortByLetterTable.length; i++) {
         sortByLetterTable[i].addEventListener("click", function () { hideElements(sortByLetterTable[i].id) });
         sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter(sortByLetterTable[i].id) });
