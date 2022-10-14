@@ -10,12 +10,26 @@ var indexedDbVersion = 1;
 var indexedDbStorage = "cocktail";
 
 
+function saveFavourite(inputStrDrink, inputStrAlcoholic, inputStrDrinkThumb, inputStrInstructions) {
+    let strDrink = inputStrDrink,
+        strAlcoholic = inputStrAlcoholic,
+        strDrinkThumb = inputStrDrinkThumb,
+        strInstructions = inputStrInstructions;
+
+    requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
+    requestDB.onsuccess = function (event) {
+        db = event.target.result;
+        usersObjectStore = db.transaction(indexedDbStorage, "readwrite").objectStore(indexedDbStorage);
+        usersObjectStore.put({ strDrink, strAlcoholic, strDrinkThumb, strInstructions });
+    };
+    readData();
+}
+
 function saveData() {
     const strDrink = document.getElementById("inputStrDrink").value,
         strAlcoholic = document.getElementById("inputStrAlcoholic").value,
         strDrinkThumb = document.getElementById("inputStrDrinkThumb").value,
         strInstructions = document.getElementById("inputStrInstructions").value;
-    let cocktail = intanceCocktail(strDrink, strAlcoholic, strDrinkThumb, strInstructions);
 
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onsuccess = function (event) {
@@ -28,15 +42,6 @@ function saveData() {
     document.getElementById("inputStrAlcoholic").value = "";
     document.getElementById("inputStrDrinkThumb").value = "";
     document.getElementById("inputStrInstructions").value = "";
-}
-
-function intanceCocktail(strDrink, strAlcoholic, strDrinkThumb, strInstructions) {
-    let cocktail = new Cocktail;
-    cocktail.strDrink = strDrink;
-    cocktail.strAlcoholic = strAlcoholic;
-    cocktail.strDrinkThumb = strDrinkThumb;
-    cocktail.strInstructions = strInstructions;
-    return cocktail;
 }
 
 function deleteData(id) {
@@ -98,26 +103,33 @@ function readData() {
 
 export function displayData(cocktailsByLetter) {
     const CONTAINER = document.getElementById("cocktails_container");
-    CONTAINER.innerHTML = "</br>";
+    CONTAINER.innerHTML = "";
+    cocktailsByLetter.forEach(element => {
+        var card = document.createElement("div"),
+            fieldStrDrink = document.createElement("h2"),
+            fieldStrAlcoholic = document.createElement("p"),
+            cocktailImg = document.createElement("img"),
+            favouriteButton = document.createElement("button");
 
-    /*     cocktailsByLetter.forEach(element => {
-            var card = document.createElement("div"),
-                fieldStrDrink = document.createElement("h2"),
-                fieldStrAlcoholic = document.createElement("p"),
-                cocktailImg = document.createElement("img");
-    
-            cocktailImg.src = element.strDrinkThumb;
-            cocktailImg.className = "tableImg";
-            cocktailImg.alt = element.strAlcoholic;
-            fieldStrDrink.innerHTML = element.strDrink;
-            fieldStrAlcoholic.innerHTML = element.strAlcoholic;
-    
-            card.appendChild(fieldStrDrink);
-            card.appendChild(fieldStrAlcoholic);
-            card.appendChild(cocktailImg);
-    
-            CONTAINER.appendChild(card);
-        }); */
+        card.className = "card";
+        fieldStrDrink.innerHTML = element.strDrink;
+        fieldStrAlcoholic.innerHTML = element.strAlcoholic;
+        cocktailImg.src = element.strDrinkThumb;
+        cocktailImg.className = "galleryImg";
+        cocktailImg.alt = element.strAlcoholic;
+        favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
+        favouriteButton.className = "saveFavourite";
+        favouriteButton.addEventListener('click', function () {
+            saveFavourite(element.strDrink, element.strAlcoholic, element.strDrinkThumb, element.strInstructions);
+        });
+
+        card.appendChild(fieldStrDrink);
+        card.appendChild(favouriteButton);
+        card.appendChild(fieldStrAlcoholic);
+        card.appendChild(cocktailImg);
+
+        CONTAINER.appendChild(card);
+    });
 };
 
 window.onload = function () {

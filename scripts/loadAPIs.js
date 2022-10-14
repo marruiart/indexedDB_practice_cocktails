@@ -32,7 +32,7 @@ export function fillRandomCocktail() {
         .then(response => response.json())
         .then((data) => {
             inputStrDrink.value = data["drinks"][0]["strDrink"];
-            inputStrAlcoholic.value = data["drinks"][0]["strAlcoholic"] + " drink";
+            inputStrAlcoholic.value = data["drinks"][0]["strAlcoholic"];
             inputStrDrinkThumb.value = data["drinks"][0]["strDrinkThumb"];
             inputStrInstructions.value = data["drinks"][0]["strInstructions"];
         });
@@ -41,19 +41,20 @@ export function fillRandomCocktail() {
 export function listCocktailsByFirstLetter(letter) {
     let cocktailsByLetter = [];
 
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=' + letter)
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
         .then(response => response.json())
         .then((data) => {
             for (let c in data["drinks"]) {
                 let cocktail = new Cocktail(data["drinks"][c]["strDrink"],
-                    data["drinks"][c]["strAlcoholic"] + " drink",
+                    data["drinks"][c]["strAlcoholic"],
                     data["drinks"][c]["strDrinkThumb"],
                     data["drinks"][c]["strInstructions"]);
                 cocktailsByLetter.push(cocktail);
-                console.log(cocktailsByLetter);
             }
+            Promise.all(cocktailsByLetter).then(cocktailsByLetter.forEach(element => {
+                displayData(cocktailsByLetter);
+            }))
         });
-    console.log(cocktailsByLetter);
-    displayData(cocktailsByLetter);
+
 }
 

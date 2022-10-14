@@ -14,6 +14,7 @@
 
 	<!-- Fonts & icons -->
 	<script src="https://kit.fontawesome.com/2e84e4fa5d.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
@@ -50,10 +51,8 @@
 				<a href="#" id="r" class="sortByLetterTable button--menu">R</a>
 				<a href="#" id="s" class="sortByLetterTable button--menu">S</a>
 				<a href="#" id="t" class="sortByLetterTable button--menu">T</a>
-				<a href="#" id="u" class="sortByLetterTable button--menu">U</a>
 				<a href="#" id="v" class="sortByLetterTable button--menu">V</a>
 				<a href="#" id="w" class="sortByLetterTable button--menu">W</a>
-				<a href="#" id="x" class="sortByLetterTable button--menu">X</a>
 				<a href="#" id="y" class="sortByLetterTable button--menu">Y</a>
 				<a href="#" id="z" class="sortByLetterTable button--menu">Z</a>
 			</div>
@@ -65,10 +64,15 @@
 				<thead class="--bg_enfasis_c --white">
 					<tr>
 						<th>
-							<input type="text" id="inputStrDrink" size="15" placeholder="StrDrink..." required />
+							<input type="text" id="inputStrDrink" size="15" placeholder="Título" required />
 						<th>
-							<input type="text" id="inputStrAlcoholic" size="15" placeholder="StrAlcoholic..."
-								required />
+							<select name="StrAlcoholic" id="inputStrAlcoholic" required>
+								<option value=""></option>
+								<option value="Alcoholic">Alcoholic</option>
+								<option value="Non alcoholic">Non alcoholic</option>
+							</select>
+							<!-- <input type="text" id="inputStrAlcoholic" size="15" placeholder="StrAlcoholic..."
+								required /> -->
 						</th>
 						<th>
 							<input type="text" id="inputStrDrinkThumb" size="15" placeholder="Planeta..." required />
@@ -108,6 +112,13 @@
 		</main>
 
 
+		<footer class="footer">
+
+			<div>
+				<p>Marina Ruiz Artacho</p>
+			</div>
+
+		</footer>
 	</div>
 
 </body>
