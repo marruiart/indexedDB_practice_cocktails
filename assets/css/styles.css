@@ -8,10 +8,10 @@
 :root {
     --header_c: #111111;
     --titles_c: #eeeeee;
-    --subheader_c: #FEFE33;
+    --subheader_c: #803749;
     --enfasis_c: #ff2058;
     --light_enfasis_c: #ff557f;
-    --light_bg_c: #F8F7ED;
+    --light_bg_c: #fffce1;
 }
 
 html {
@@ -118,6 +118,14 @@ p {
     text-align: center;
 }
 
+.--small {
+    width: 40% !important;
+}
+
+.--extra-small {
+    width: 15% !important;
+}
+
 /*------------------------------------------ CONTENT ------------------------------------------*/
 
 .content {
@@ -217,10 +225,6 @@ table {
     width: 70%;
 }
 
-.table--small {
-    width: 40%;
-}
-
 tr {
     display: flex;
     justify-content: stretch;
@@ -314,10 +318,6 @@ tbody>tr:nth-child(odd) {
     border-radius: 5px;
 }
 
-.input.--small {
-    width: 40%;
-}
-
 .input:focus {
     background-color: #f8f8f8;
     box-shadow: 5px 5px 5px #dedede inset;
@@ -353,16 +353,6 @@ tbody>tr:nth-child(odd) {
     color: var(--header_c);
     background-color: transparent;
     font-size: 2em;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 100ms all;
-}
-
-.button--favourite {
-    border: none;
-    color: var(--header_c);
-    background-color: transparent;
-    font-size: 1em;
     text-decoration: none;
     cursor: pointer;
     transition: 100ms all;
@@ -405,7 +395,7 @@ tbody>tr:nth-child(odd) {
 
 .button--favourite {
     border: none;
-    color: var(--header_c);
+    color: var(--light_bg_c);
     background-color: transparent;
     font-size: 1em;
     text-decoration: none;
@@ -414,7 +404,14 @@ tbody>tr:nth-child(odd) {
 }
 
 .button--favourite:hover {
-    color: var(--light_bg_c);
+    color: var(--titles_c);
+
+    border: none;
+}
+
+.button--favourite:active {
+    color: var(--subheader_c);
+    color: var(--header_c);
     border: none;
 }
 

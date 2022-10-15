@@ -3,7 +3,8 @@
 import { getCocktailByName, listCocktailsByFirstLetter } from './loadAPIs.js';
 import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
-import { fillSelectOptions } from './fillSelectOptions.js';
+import { fillSelectOptions } from './selectFunctions.js';
+import { ALL_COCKTAILS } from './arrays.js';
 
 var requestDB, db, usersObjectStore,
     indexedDbName = "cocktails",
@@ -107,7 +108,7 @@ window.onload = function () {
     requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onupgradeneeded = function (event) {
         db = event.target.result;
-        var objectStore = db.createObjectStore(indexedDbStorage, { keyPath: "id", autoIncrement: true });
+        let objectStore = db.createObjectStore(indexedDbStorage, { keyPath: "id", autoIncrement: true });
         objectStore.createIndex("strDrink_index", "strDrink", { unique: false });
         objectStore.createIndex("strAlcoholic_index", "strAlcoholic", { unique: false });
         objectStore.createIndex("strDrinkThumb_index", "strDrinkThumb", { unique: false });
@@ -115,7 +116,7 @@ window.onload = function () {
     };
 
     let selectFirstLetter = document.getElementById("select_first_letter"),
-        options_select = document.getElementById("options_select"),
+        subselectFirstLetter = document.getElementById("subselect_first_letter"),
         buttonSelectByName = document.getElementById("button_select_by_name"),
         showMainTable = document.getElementById("show_main_table"),
         showSearch = document.getElementById("show_search"),
@@ -123,8 +124,8 @@ window.onload = function () {
 
     document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
-    selectFirstLetter.addEventListener("click", function () { fillSelectOptions(selectFirstLetter.value) });
-    buttonSelectByName.addEventListener("click", function () { getCocktailByName(options_select.value) });
+    selectFirstLetter.addEventListener("click", function () { fillSelectOptions(ALL_COCKTAILS, "subselect_first_letter", selectFirstLetter.value) });
+    buttonSelectByName.addEventListener("click", function () { getCocktailByName(subselectFirstLetter.value) });
     showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
     showSearch.addEventListener("click", function () { hideElements(showSearch.id) });
     for (let i = 0; i < sortByLetterTable.length; i++) {
