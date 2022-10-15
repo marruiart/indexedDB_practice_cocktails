@@ -2,7 +2,7 @@
 
 import { allCocktails } from './cocktailNames.js';
 
-export function fillOptions(firstLetter) {
+export function fillSelectOptions(firstLetter) {
     const SELECT = document.getElementById("options_select");
     SELECT.innerHTML = "";
     allCocktails.forEach(element => {

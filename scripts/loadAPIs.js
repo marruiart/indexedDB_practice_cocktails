@@ -4,6 +4,7 @@ import { displayGallery, displayOneCocktail } from './displayGallery.js';
 import { Cocktail } from './CLASSES/Cocktail.js';
 
 export function getCocktailByName(name) {
+    console.log(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
         .then(response => response.json())
         .then((data) => {

@@ -3,15 +3,15 @@
 import { getCocktailByName, listCocktailsByFirstLetter } from './loadAPIs.js';
 import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
-import { fillOptions } from './fillOptions.js';
+import { fillSelectOptions } from './fillSelectOptions.js';
 
-var requestDB, db, usersObjectStore;
-var indexedDbName = "cocktails";
-var indexedDbVersion = 1;
-var indexedDbStorage = "cocktail";
+var requestDB, db, usersObjectStore,
+    indexedDbName = "cocktails",
+    indexedDbVersion = 1,
+    indexedDbStorage = "cocktail";
 
 
-export function saveFavourite (input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
+export function saveFavourite(input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
     let strDrink = input_strDrink,
         strAlcoholic = input_strAlcoholic,
         strDrinkThumb = input_strDrinkThumb,
@@ -104,7 +104,7 @@ function readData() {
 
 window.onload = function () {
 
-    requestDB = indexedDB.open(indexedDbName, indexedDbVersion); // SI EXISTE LA ABRE, SI NO LA CREA
+    requestDB = indexedDB.open(indexedDbName, indexedDbVersion);
     requestDB.onupgradeneeded = function (event) {
         db = event.target.result;
         var objectStore = db.createObjectStore(indexedDbStorage, { keyPath: "id", autoIncrement: true });
@@ -112,24 +112,24 @@ window.onload = function () {
         objectStore.createIndex("strAlcoholic_index", "strAlcoholic", { unique: false });
         objectStore.createIndex("strDrinkThumb_index", "strDrinkThumb", { unique: false });
         objectStore.createIndex("strInstructions_index", "strInstructions", { unique: false });
-
     };
+
+    let selectFirstLetter = document.getElementById("select_first_letter"),
+        options_select = document.getElementById("options_select"),
+        buttonSelectByName = document.getElementById("button_select_by_name"),
+        showMainTable = document.getElementById("show_main_table"),
+        showSearch = document.getElementById("show_search"),
+        sortByLetterTable = document.getElementsByClassName("sort_by_letter_table");
+
     document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
-    let select_first_letter = document.getElementById("select_first_letter");
-    let options_select = document.getElementById("options_select");
-    let button_select_by_name = document.getElementById("button_select_by_name");
-
-    let showMainTable = document.getElementById("showMainTable");
-    let showSearch = document.getElementById("showSearch");
-    let sortByLetterTable = document.getElementsByClassName("sortByLetterTable");
-    select_first_letter.addEventListener("click", function () { fillOptions(select_first_letter.value) });
-    button_select_by_name.addEventListener("click", function () { getCocktailByName(options_select.value) });
+    selectFirstLetter.addEventListener("click", function () { fillSelectOptions(selectFirstLetter.value) });
+    buttonSelectByName.addEventListener("click", function () { getCocktailByName(options_select.value) });
     showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
     showSearch.addEventListener("click", function () { hideElements(showSearch.id) });
     for (let i = 0; i < sortByLetterTable.length; i++) {
         sortByLetterTable[i].addEventListener("click", function () { hideElements(sortByLetterTable[i].id) });
         sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter(sortByLetterTable[i].id) });
-    }
+    } sortByLetterTable
     readData();
 };
