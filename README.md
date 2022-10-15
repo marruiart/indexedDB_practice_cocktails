@@ -32,6 +32,3 @@ The main objective of this project was to improve using:
 ## Contact
 
 Marina Ruiz - [LinkedIn](https://www.linkedin.com/in/marruiart/) - marruiart@gmail.com
-
-Project Link: [https://github.com/marruiart/javascript-calculator](https://github.com/marruiart/javascript-calculator)
-
