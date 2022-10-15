@@ -207,8 +207,9 @@ h1>img {
     display: none;
 }
 
-#search_main {
+main#search_main {
     display: none;
+    height: 70vh;
 }
 
 /* TABLES */
@@ -427,11 +428,72 @@ tbody>tr:nth-child(odd) {
     border: none;
     border-radius: 5px 5px 0 0;
     cursor: pointer;
-    transition: 500ms all;
 }
 
 .gallery_img {
     width: 80%;
+}
+
+/* Cocktails by name */
+
+#selected_cocktail_container {
+    display:flex;
+    justify-content: center;
+}
+
+.card.--one_cocktail {
+    margin: 3em 0;
+    width: 60%;
+    height: 100%;
+}
+
+.card.--one_cocktail>h2 {
+    font-size: 2em;
+}
+
+.card__information {
+    display: flex;
+    justify-content: stretch;
+    background-color: rgba(255, 255, 255, 0.555);
+    border-radius: 0 0 10px 0;
+}
+
+.card__information>div {
+    padding: 3em;
+}
+
+.cocktail_name.--one_coctkail {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 2.5em;
+    width: 100%;
+    margin: 0 0.2em;
+    padding: 0 1em;
+    color: white;
+    background-color: var(--light_enfasis_c);
+    border: none;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.cocktail_img.--one_coctkail {
+    width: 40%;
+    border-radius: 0 0 0 10px;
+}
+
+.alcohol_info.--one_coctkail {
+    background-color: var(--titles_c);
+    color: var(--header_c);
+    font-weight: bold;
+    width: fit-content;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.instructions_info.--one_coctkail {
+    margin-top: 1em;
+    padding: 0.5em;
 }
 
 /*------------------------------------------ FOOTER ------------------------------------------*/
