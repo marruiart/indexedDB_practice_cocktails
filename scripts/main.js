@@ -1,9 +1,9 @@
+'use strict';
+
 import { getCocktailByName, listCocktailsByFirstLetter } from './loadAPIs.js';
 import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
 import { fillOptions } from './fillOptions.js';
-
-'use strict';
 
 var requestDB, db, usersObjectStore;
 var indexedDbName = "cocktails";

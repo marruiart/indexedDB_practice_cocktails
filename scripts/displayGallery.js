@@ -1,3 +1,5 @@
+"use strict";
+
 import { saveFavourite } from './main.js';
 
 export function displayOneCocktail(cocktail) {
