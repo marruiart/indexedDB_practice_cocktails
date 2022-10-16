@@ -5,12 +5,12 @@ import { fillRandomCocktail } from './getRandomCocktail.js';
 import { hideElements } from './hideElements.js';
 import { fillSelectOptions } from './selectFunctions.js';
 import { ALL_COCKTAILS } from './arrays.js';
+import { activeMenuButton } from './activeMenuButton.js';
 
 var requestDB, db, usersObjectStore,
     indexedDbName = "cocktails",
     indexedDbVersion = 1,
     indexedDbStorage = "cocktail";
-
 
 export function saveFavourite(input_strDrink, input_strAlcoholic, input_strDrinkThumb, input_strInstructions) {
     let strDrink = input_strDrink,
@@ -128,9 +128,10 @@ window.onload = function () {
     buttonSelectByName.addEventListener("click", function () { getCocktailByName(subselectFirstLetter.value) });
     showMainTable.addEventListener("click", function () { hideElements(showMainTable.id) });
     showSearch.addEventListener("click", function () { hideElements(showSearch.id) });
+    activeMenuButton();
     for (let i = 0; i < sortByLetterTable.length; i++) {
         sortByLetterTable[i].addEventListener("click", function () { hideElements(sortByLetterTable[i].id) });
         sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter(sortByLetterTable[i].id) });
-    } sortByLetterTable
+    } sortByLetterTable;
     readData();
 };
