@@ -30,32 +30,33 @@
 
 		<menu class="menu">
 			<div class="menu__div">
-				<a href="#" id="show_main_table" class="button--menu active"><i class="fa fa-heart"></i> &nbsp; Cocktails</a>
+				<a href="#" id="show_main_table" class="button--menu active"><i class="fa fa-heart"></i> &nbsp;
+					Cocktails</a>
 				<a href="#" id="show_search" class="button--menu"><i class="fa fa-search"></i></a>
-				<a href="#" id="a" class="sort_by_letter_table button--menu">A</a>
-				<a href="#" id="b" class="sort_by_letter_table button--menu">B</a>
-				<a href="#" id="c" class="sort_by_letter_table button--menu">C</a>
-				<a href="#" id="d" class="sort_by_letter_table button--menu">D</a>
-				<a href="#" id="e" class="sort_by_letter_table button--menu">E</a>
-				<a href="#" id="f" class="sort_by_letter_table button--menu">F</a>
-				<a href="#" id="g" class="sort_by_letter_table button--menu">G</a>
-				<a href="#" id="h" class="sort_by_letter_table button--menu">H</a>
-				<a href="#" id="i" class="sort_by_letter_table button--menu">I</a>
-				<a href="#" id="j" class="sort_by_letter_table button--menu">J</a>
-				<a href="#" id="k" class="sort_by_letter_table button--menu">K</a>
-				<a href="#" id="l" class="sort_by_letter_table button--menu">L</a>
-				<a href="#" id="m" class="sort_by_letter_table button--menu">M</a>
-				<a href="#" id="n" class="sort_by_letter_table button--menu">N</a>
-				<a href="#" id="o" class="sort_by_letter_table button--menu">O</a>
-				<a href="#" id="p" class="sort_by_letter_table button--menu">P</a>
-				<a href="#" id="q" class="sort_by_letter_table button--menu">Q</a>
-				<a href="#" id="r" class="sort_by_letter_table button--menu">R</a>
-				<a href="#" id="s" class="sort_by_letter_table button--menu">S</a>
-				<a href="#" id="t" class="sort_by_letter_table button--menu">T</a>
-				<a href="#" id="v" class="sort_by_letter_table button--menu">V</a>
-				<a href="#" id="w" class="sort_by_letter_table button--menu">W</a>
-				<a href="#" id="y" class="sort_by_letter_table button--menu">Y</a>
-				<a href="#" id="z" class="sort_by_letter_table button--menu">Z</a>
+				<a href="#" id="a" class="sort_by_first_letter button--menu">A</a>
+				<a href="#" id="b" class="sort_by_first_letter button--menu">B</a>
+				<a href="#" id="c" class="sort_by_first_letter button--menu">C</a>
+				<a href="#" id="d" class="sort_by_first_letter button--menu">D</a>
+				<a href="#" id="e" class="sort_by_first_letter button--menu">E</a>
+				<a href="#" id="f" class="sort_by_first_letter button--menu">F</a>
+				<a href="#" id="g" class="sort_by_first_letter button--menu">G</a>
+				<a href="#" id="h" class="sort_by_first_letter button--menu">H</a>
+				<a href="#" id="i" class="sort_by_first_letter button--menu">I</a>
+				<a href="#" id="j" class="sort_by_first_letter button--menu">J</a>
+				<a href="#" id="k" class="sort_by_first_letter button--menu">K</a>
+				<a href="#" id="l" class="sort_by_first_letter button--menu">L</a>
+				<a href="#" id="m" class="sort_by_first_letter button--menu">M</a>
+				<a href="#" id="n" class="sort_by_first_letter button--menu">N</a>
+				<a href="#" id="o" class="sort_by_first_letter button--menu">O</a>
+				<a href="#" id="p" class="sort_by_first_letter button--menu">P</a>
+				<a href="#" id="q" class="sort_by_first_letter button--menu">Q</a>
+				<a href="#" id="r" class="sort_by_first_letter button--menu">R</a>
+				<a href="#" id="s" class="sort_by_first_letter button--menu">S</a>
+				<a href="#" id="t" class="sort_by_first_letter button--menu">T</a>
+				<a href="#" id="v" class="sort_by_first_letter button--menu">V</a>
+				<a href="#" id="w" class="sort_by_first_letter button--menu">W</a>
+				<a href="#" id="y" class="sort_by_first_letter button--menu">Y</a>
+				<a href="#" id="z" class="sort_by_first_letter button--menu">Z</a>
 
 			</div>
 		</menu>
@@ -116,7 +117,16 @@
 			</article>
 		</main>
 
-		<main id="letter_table" class="main --bg_light_bg_c">
+		<main id="gallery_main" class="main --bg_light_bg_c">
+			<div class="tri-state-toggle">
+				<label for="toggle_one">Alcoholic</label>
+				<input type="radio" class="button--toggle" name="toggle" id="toggle_one" value="Alcoholic" />
+				<label for="toggle_two">Both</label>
+				<input type="radio" class="button--toggle" name="toggle" id="toggle_two" value="Both" checked/>
+				<label for="toggle_three">Non alcoholic</label>
+				<input type="radio" class="button--toggle" name="toggle" id="toggle_three" value="Non alcoholic" />
+			</div>
+
 			<div id="cocktails_container">
 				<!-- The gallery will be generated with js -->
 			</div>

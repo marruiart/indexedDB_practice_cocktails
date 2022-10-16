@@ -120,7 +120,8 @@ window.onload = function () {
         buttonSelectByName = document.getElementById("button_select_by_name"),
         showMainTable = document.getElementById("show_main_table"),
         showSearch = document.getElementById("show_search"),
-        sortByLetterTable = document.getElementsByClassName("sort_by_letter_table");
+        sortByLetterTable = document.getElementsByClassName("sort_by_first_letter"),
+        toggleRadioButtons = document.getElementsByClassName("button--toggle");
 
     document.getElementById("save").addEventListener("click", saveCocktail);
     document.getElementById("getRandomCocktail").addEventListener("click", fillRandomCocktail);
@@ -131,7 +132,10 @@ window.onload = function () {
     activeMenuButton();
     for (let i = 0; i < sortByLetterTable.length; i++) {
         sortByLetterTable[i].addEventListener("click", function () { hideElements(sortByLetterTable[i].id) });
-        sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter(sortByLetterTable[i].id) });
-    } sortByLetterTable;
+        sortByLetterTable[i].addEventListener("click", function () { listCocktailsByFirstLetter() });
+    };
+    for (let i = 0; i < toggleRadioButtons.length; i++) {
+        toggleRadioButtons[i].addEventListener("click", function () { listCocktailsByFirstLetter(toggleRadioButtons[i].value) });
+    };
     readData();
 };

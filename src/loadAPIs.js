@@ -18,8 +18,10 @@ export function getCocktailByName(name) {
         });
 }
 
-export function listCocktailsByFirstLetter(letter) {
+export function listCocktailsByFirstLetter(toggle = "Both") {
     let cocktailsByLetter = [];
+    let letters = document.getElementsByClassName("active");
+    let letter = letters[0].id;
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
         .then(response => response.json())
@@ -32,7 +34,7 @@ export function listCocktailsByFirstLetter(letter) {
                 cocktailsByLetter.push(cocktail);
             }
             Promise.all(cocktailsByLetter).then(cocktailsByLetter.forEach(element => {
-                displayGallery(cocktailsByLetter);
+                displayGallery(cocktailsByLetter, toggle);
             }))
         });
 

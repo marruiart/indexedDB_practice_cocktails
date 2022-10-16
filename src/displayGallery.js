@@ -47,38 +47,40 @@ export function displayOneCocktail(cocktail) {
     hideElements("show_search");
 }
 
-export function displayGallery(cocktailsByLetter) {
+export function displayGallery(cocktailsByLetter, toggle) {
     const CONTAINER = document.getElementById("cocktails_container");
     CONTAINER.innerHTML = "";
     cocktailsByLetter.forEach(cocktail => {
-        var card = document.createElement("div"),
-            fieldStrDrink = document.createElement("h2"),
-            fieldStrAlcoholic = document.createElement("p"),
-            cocktailImg = document.createElement("img"),
-            favouriteButton = document.createElement("button");
+        if ((cocktail.strAlcoholic == toggle || cocktail.strAlcoholic == "Optional alcohol") || toggle == "Both") {
+            var card = document.createElement("div"),
+                fieldStrDrink = document.createElement("h2"),
+                fieldStrAlcoholic = document.createElement("p"),
+                cocktailImg = document.createElement("img"),
+                favouriteButton = document.createElement("button");
 
-        card.className = "card";
-        fieldStrDrink.className = "cocktail_name";
-        cocktailImg.className = "gallery_img";
-        favouriteButton.className = "button--favourite";
-        fieldStrAlcoholic.className = "cocktail_name --alcoholic";
-        fieldStrDrink.innerHTML = cocktail.strDrink;
-        fieldStrAlcoholic.innerHTML = cocktail.strAlcoholic;
-        favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
-        cocktailImg.src = cocktail.strDrinkThumb;
-        cocktailImg.alt = cocktail.strDrink;
-        cocktailImg.addEventListener('click', function () {
-            displayOneCocktail(cocktail);
-        });
-        favouriteButton.addEventListener('click', function () {
-            saveFavourite(cocktail.strDrink, cocktail.strAlcoholic, cocktail.strDrinkThumb, cocktail.strInstructions);
-        });
+            card.className = "card";
+            fieldStrDrink.className = "cocktail_name";
+            cocktailImg.className = "gallery_img";
+            favouriteButton.className = "button--favourite";
+            fieldStrAlcoholic.className = "cocktail_name --alcoholic";
+            fieldStrDrink.innerHTML = cocktail.strDrink;
+            fieldStrAlcoholic.innerHTML = cocktail.strAlcoholic;
+            favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
+            cocktailImg.src = cocktail.strDrinkThumb;
+            cocktailImg.alt = cocktail.strDrink;
+            cocktailImg.addEventListener('click', function () {
+                displayOneCocktail(cocktail);
+            });
+            favouriteButton.addEventListener('click', function () {
+                saveFavourite(cocktail.strDrink, cocktail.strAlcoholic, cocktail.strDrinkThumb, cocktail.strInstructions);
+            });
 
-        fieldStrDrink.appendChild(favouriteButton);
-        card.appendChild(fieldStrDrink);
-        card.appendChild(cocktailImg);
-        card.appendChild(fieldStrAlcoholic);
+            fieldStrDrink.appendChild(favouriteButton);
+            card.appendChild(fieldStrDrink);
+            card.appendChild(cocktailImg);
+            card.appendChild(fieldStrAlcoholic);
 
-        CONTAINER.appendChild(card);
+            CONTAINER.appendChild(card);
+        }
     });
 };
