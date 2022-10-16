@@ -1,6 +1,7 @@
 "use strict";
 
 import { saveFavourite } from './main.js';
+import { hideElements } from './hideElements.js';
 
 export function displayOneCocktail(cocktail) {
     const CONTAINER = document.getElementById("selected_cocktail_container");
@@ -28,9 +29,7 @@ export function displayOneCocktail(cocktail) {
     fieldStrAlcoholic.innerHTML = cocktail.strAlcoholic;
     strInstructions.innerHTML = cocktail.strInstructions;
     favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
-    divCocktailImg.style.backgroundImage = "url("+cocktail.strDrinkThumb+")";
-    //cocktailImg.src = cocktail.strDrinkThumb;
-    //cocktailImg.alt = cocktail.strAlcoholic;
+    divCocktailImg.style.backgroundImage = "url(" + cocktail.strDrinkThumb + ")";
     favouriteButton.addEventListener('click', function () {
         saveFavourite(cocktail.strDrink, cocktail.strAlcoholic, cocktail.strDrinkThumb, cocktail.strInstructions);
     })
@@ -45,6 +44,7 @@ export function displayOneCocktail(cocktail) {
     card.appendChild(information);
 
     CONTAINER.appendChild(card);
+    hideElements("show_search");
 }
 
 export function displayGallery(cocktailsByLetter) {
@@ -66,7 +66,10 @@ export function displayGallery(cocktailsByLetter) {
         fieldStrAlcoholic.innerHTML = cocktail.strAlcoholic;
         favouriteButton.innerHTML = '<i class="fa fa-heart"></i>';
         cocktailImg.src = cocktail.strDrinkThumb;
-        cocktailImg.alt = cocktail.strAlcoholic;
+        cocktailImg.alt = cocktail.strDrink;
+        cocktailImg.addEventListener('click', function () {
+            displayOneCocktail(cocktail);
+        });
         favouriteButton.addEventListener('click', function () {
             saveFavourite(cocktail.strDrink, cocktail.strAlcoholic, cocktail.strDrinkThumb, cocktail.strInstructions);
         });
