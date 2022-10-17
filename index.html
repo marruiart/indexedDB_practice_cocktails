@@ -118,13 +118,14 @@
 		</main>
 
 		<main id="gallery_main" class="main --bg_light_bg_c">
-			<div class="tri-state-toggle">
-				<label for="toggle_one">Alcoholic</label>
+			<div class="tw-toggle">
 				<input type="radio" class="button--toggle" name="toggle" id="toggle_one" value="Alcoholic" />
-				<label for="toggle_two">Both</label>
+				<label for="toggle_one" class="toggle toggle-yes"><i class="fa fa-check"></i></label>
 				<input type="radio" class="button--toggle" name="toggle" id="toggle_two" value="Both" checked/>
-				<label for="toggle_three">Non alcoholic</label>
+				<label for="toggle_two" class="toggle toggle-yes"><i class="fa fa-minus"></i></label>
 				<input type="radio" class="button--toggle" name="toggle" id="toggle_three" value="Non alcoholic" />
+				<label for="toggle_three" class="toggle toggle-yes"><i class="fa fa-times"></i></label>
+				<span id="toggle_span"></span>
 			</div>
 
 			<div id="cocktails_container">

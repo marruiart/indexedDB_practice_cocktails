@@ -168,7 +168,8 @@ p {
     transition: 500ms all;
 }
 
-.active, .button--menu:hover {
+.active,
+.button--menu:hover {
     color: black;
     background-color: var(--light_enfasis_c);
 }
@@ -208,7 +209,8 @@ h1>img {
     display: none;
 }
 
-main#search_main {
+main#search_main,
+main#gallery_main {
     display: none;
 }
 
@@ -440,6 +442,63 @@ tbody>tr:nth-child(odd) {
     color: var(--subheader_c);
     color: var(--header_c);
     border: none;
+}
+
+/* Three way toggle */
+
+.tw-toggle {
+    width: fit-content;
+    padding: 0.2em;
+    border-radius: 20px;
+    position: relative;
+    border: 2px solid var(--enfasis_c);
+    background-color: var(--titles_c);
+    box-shadow: 2px 2px 2px rgb(184, 184, 184);
+}
+
+.tw-toggle label {
+    color: var(--enfasis_c);
+    position: relative;
+    z-index: 2;
+    padding: 0.2em;
+    font-size: 1em;
+}
+
+.tw-toggle input {
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.tw-toggle span {
+    height: 1.3em;
+    width: 1.3em;
+    border-radius: 50%;
+    background: var(--enfasis_c);
+    display: block;
+    position: absolute;
+    left: 30px;
+    top: 2.5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.tw-toggle input[value="Alcoholic"]:checked~span {
+    left: 4px;
+}
+
+.tw-toggle input[value="Non alcoholic"]:checked~span {
+    left: 54.5px;
+}
+
+.tw-toggle input[value="Both"]:checked~span {
+    left: 30px;
+}
+
+.tw-toggle input[value="Alcoholic"]:checked+label,
+.tw-toggle input[value="Non alcoholic"]:checked+label,
+.tw-toggle input[value="Both"]:checked+label {
+    color: #fff;
 }
 
 /* One cocktail details */
